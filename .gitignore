@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/node,xcode,python,powershell,sublimetext,visualstudio,xamarinstudio,visualstudiocode
+# Created by https://www.gitignore.io/api/node,macos,xcode,python,powershell,sublimetext,visualstudio,xamarinstudio,visualstudiocode,windows
 
 ### Node ###
 # Logs
@@ -622,5 +622,29 @@ ASALocalRun/
 # should be stored in the .pubxml.user file.
 *.pubxml.user
 
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
 
-# End of https://www.gitignore.io/api/node,xcode,python,powershell,sublimetext,visualstudio,xamarinstudio,visualstudiocode
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# End of https://www.gitignore.io/api/node,macos,xcode,python,powershell,sublimetext,visualstudio,xamarinstudio,visualstudiocode,windows
