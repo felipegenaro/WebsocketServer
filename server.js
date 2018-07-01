@@ -7,7 +7,7 @@ var fs = require('fs')
 var connection = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "61984634",
+	password: "<password>",
 })
 
 connection.connect(function(err) {
