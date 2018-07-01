@@ -2,7 +2,7 @@
 	"name": "Projeto WebSocket SENAI Frederico Jacob",
 	"description": "Servidor WebSocket para gerenciar informações de modulos ESP8266",
 	"author": "Felipe Corniani de Genaro	<felipegenaro@outlook.com.br>",
-	"version": "2.0.2",
+	"version": "2.0.0",
 	"private": "true",
 	"dependencies": {
 		"nodejs-websocket": "*",
