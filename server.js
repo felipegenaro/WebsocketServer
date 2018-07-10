@@ -5,15 +5,17 @@ var fs = require('fs')
 
 // create DB Connection
 var connection = mysql.createConnection({
+	multipleStatements: true,
 	host: "localhost",
 	user: "root",
-	password: "<password>",
+	password: "61984634",
+	// database: "Projeto"
 })
 
 connection.connect(function(err) {
 	if (err) throw err
 	console.log("Connected")
-	makeDB()
+	setDB()
 })
 
 // creating the websocket server
@@ -42,6 +44,10 @@ var server = ws.createServer(function (conn) {
 				qry += "SELECT * FROM (SELECT '"+mac[1]+"', '"+owner[1]+"', '"+dateNow()+"', NOW(3)) AS tmp "
 			   	qry += "WHERE NOT EXISTS (SELECT stMAC FROM Modulos WHERE stMAC = '"+mac[1]+"') LIMIT 1;"
 			checkQry(qry)
+		}
+		else if (msg.includes("overLoad")) {
+			console.log(msg)
+			// conn.sendText("")
 		}
 		// store msgs
 		else {
@@ -76,6 +82,7 @@ var server = ws.createServer(function (conn) {
 // format the date now
 function dateNow() {
 	var date = " at " + dateFormat((new Date()), "dddd HH:MM:ss l, dd/mm/yyyy ")
+	return date
 }
 
 function logFiles(content, type) {
@@ -86,17 +93,13 @@ function logFiles(content, type) {
 	logger.write(content + "\n")
 }
 
-// initiate DB
-function makeDB() {
-	var qry =  "CREATE DATABASE IF NOT EXISTS Projeto;"
-	checkQry(qry)
-		qry = "USE Projeto"
-	checkQry(qry)
-		qry =  "CREATE TABLE IF NOT EXISTS Dados (id int NOT NULL AUTO_INCREMENT, stLocal varchar(15), stOwner varchar(20), stMsg varchar(255), dtDate varchar(50), dtDb varchar(23), PRIMARY KEY (id));"
-	checkQry(qry)
-		qry = "CREATE TABLE IF NOT EXISTS Modulos (id int NOT NULL AUTO_INCREMENT, stMAC varchar(17), stOwner varchar(20), dtDate varchar(50), dtDb varchar(23), PRIMARY KEY (id));"
-	checkQry(qry)
-		qry = "CREATE TABLE IF NOT EXISTS Conexao (id int NOT NULL AUTO_INCREMENT, stLocal varchar(15), dtDate varchar(50), dtDb varchar(23), PRIMARY KEY (id));"
+// set DB env
+function setDB() {
+	qry =  "CREATE DATABASE IF NOT EXISTS Projeto;"
+	qry += "use Projeto;"
+	qry += "CREATE TABLE IF NOT EXISTS Dados (id int UNSIGNED AUTO_INCREMENT PRIMARY KEY, stLocal varchar(15), stOwner varchar(20), stMsg varchar(255), dtDate varchar(50), dtDb varchar(23)); "
+	qry += "CREATE TABLE IF NOT EXISTS Modulos (id int UNSIGNED AUTO_INCREMENT PRIMARY KEY, stMAC varchar(17), stOwner varchar(20), dtDate varchar(50), dtDb varchar(23)); "
+	qry += "CREATE TABLE IF NOT EXISTS Conexao (id int UNSIGNED AUTO_INCREMENT PRIMARY KEY, stLocal varchar(15), dtDate varchar(50), dtDb varchar(23));"
 	checkQry(qry)
 }
 
